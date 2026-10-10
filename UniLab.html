@@ -1,0 +1,196 @@
+<!DOCTYPE html><html lang="uz"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>UniLab</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+:root{--bg:#eef3f6;--card:rgba(255,255,255,.58);--tx:#1b1838;--mu:#5d5a7a;--ln:rgba(98,60,190,.2);--ac:#5b2fc0;--e:#10b981;--v:#7c3aed;--inp:rgba(255,255,255,.7);--bxt:#14122b;--ok:#0f6b3a;--er:#a51d1d;--wa:#8a4b08;--okb:#d4f5e4;--erb:#fbe0de;--wab:#fdefcf;--hv:rgba(124,58,237,.08);--tg1:#047857;--tg2:#6d28d9;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0a0918;--card:rgba(26,22,52,.58);--tx:#ecebff;--mu:#a9a6cc;--ln:rgba(167,139,250,.24);--ac:#b7a0ff;--inp:rgba(10,9,24,.55);--bxt:#fff;--ok:#6ee79a;--er:#ff9a94;--wa:#f6c163;--okb:rgba(20,90,50,.5);--erb:rgba(120,30,30,.5);--wab:rgba(110,80,10,.5);--hv:rgba(52,216,168,.09);--tg1:#34d399;--tg2:#b79cff}}
+:root[data-theme="dark"]{--bg:#0a0918;--card:rgba(26,22,52,.58);--tx:#ecebff;--mu:#a9a6cc;--ln:rgba(167,139,250,.24);--ac:#b7a0ff;--inp:rgba(10,9,24,.55);--bxt:#fff;--ok:#6ee79a;--er:#ff9a94;--wa:#f6c163;--okb:rgba(20,90,50,.5);--erb:rgba(120,30,30,.5);--wab:rgba(110,80,10,.5);--hv:rgba(52,216,168,.09);--tg1:#34d399;--tg2:#b79cff}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;color:var(--tx);font:15px/1.55 "IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:radial-gradient(60vw 50vh at 8% 0,rgba(16,185,129,.28),transparent 70%),radial-gradient(60vw 60vh at 100% 10%,rgba(124,58,237,.26),transparent 70%),linear-gradient(rgba(124,58,237,.06) 1px,transparent 1px) 0 0/32px 32px,linear-gradient(90deg,rgba(16,185,129,.06) 1px,transparent 1px) 0 0/32px 32px,var(--bg);background-attachment:fixed}
+#app{position:relative;z-index:1}
+.bub{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.bub i{position:absolute;bottom:-60px;width:var(--s);height:var(--s);border-radius:50%;border:1px solid rgba(255,255,255,.5);background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.55),rgba(16,185,129,.14) 60%,rgba(124,58,237,.12));animation:up linear infinite}
+@keyframes up{to{transform:translateY(-115vh) translateX(34px)}}
+@media(prefers-reduced-motion:reduce){.bub{display:none}*{transition:none!important}}
+.gl{--g:linear-gradient(135deg,rgba(16,185,129,.5),rgba(124,58,237,.5));position:relative;border:1px solid rgba(255,255,255,.55);border-radius:12px;padding:9px 16px;font:inherit;font-weight:600;cursor:pointer;color:var(--bxt);background:linear-gradient(160deg,rgba(255,255,255,.55),rgba(255,255,255,0) 45%),var(--g);-webkit-backdrop-filter:blur(10px) saturate(1.5);backdrop-filter:blur(10px) saturate(1.5);box-shadow:inset 0 1px 0 rgba(255,255,255,.8),inset 0 -3px 6px rgba(60,20,140,.25),0 4px 0 rgba(88,52,170,.42),0 10px 18px -6px rgba(124,58,237,.5);transition:transform .15s,box-shadow .15s,filter .2s}
+.gl:hover{transform:translateY(-2px);filter:brightness(1.1) saturate(1.2)}
+.gl:active{transform:translateY(3px);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),inset 0 -2px 4px rgba(60,20,140,.3),0 1px 0 rgba(88,52,170,.42),0 3px 6px -3px rgba(124,58,237,.5)}
+.gl:focus-visible,.lk:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--e);outline-offset:2px}
+.fb svg,.mf svg{width:28px;height:28px;transition:transform .3s}.fb:hover svg,.mf:hover svg{transform:rotate(-14deg)}.ic.mf{display:none}
+.side{position:fixed;left:0;top:0;bottom:0;width:244px;z-index:20;padding:calc(env(safe-area-inset-top,0px) + 14px) 12px 14px;display:flex;flex-direction:column;gap:18px;background:var(--card);border-right:1px solid var(--ln);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);transition:width .3s,transform .3s;overflow:hidden}
+.side nav{display:flex;flex-direction:column;gap:12px}
+.nv{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:11px 14px;white-space:nowrap}
+.nv:not(.on){--g:linear-gradient(135deg,rgba(255,255,255,.3),rgba(255,255,255,.08))}
+.nv i{font-style:normal;font-size:18px;width:22px;text-align:center}
+.ft{margin-top:auto;font-size:12px}
+.mw{margin-left:244px;transition:margin .3s;min-width:0}
+.shell:not(.o) .side{width:76px}.shell:not(.o) .mw{margin-left:76px}.shell:not(.o) .t{display:none}.shell:not(.o) .nv{justify-content:center;padding:11px 0}.shell:not(.o) .br{justify-content:center}
+.scrim{display:none}
+@media(max-width:800px){.mw,.shell:not(.o) .mw{margin-left:0}.side,.shell:not(.o) .side{width:244px;transform:translateX(-105%)}.shell.o .side{transform:none}.side{background:var(--bg)}.shell.o .scrim{display:block;position:fixed;inset:0;z-index:15;background:rgba(10,8,30,.45)}.pn{display:none}.ic.mf{display:grid}}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;display:flex;align-items:center;gap:12px;padding:10px 16px;background:var(--card);border-bottom:1px solid var(--ln);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+.sp{flex:1}
+.ic{width:44px;height:44px;padding:0;display:grid;place-items:center}
+.th{border-radius:50%;color:#b45309}
+:root[data-theme="dark"] .th{color:#fde68a}
+.th svg{overflow:visible}.th .sn,.th .ry{transform-origin:12px 12px;transition:transform .5s,opacity .4s}.th .cut{transition:transform .5s}
+:root[data-theme="dark"] .th .cut{transform:translate(-8px,6px)}
+:root[data-theme="dark"] .th .sn{transform:scale(1.15)}
+:root[data-theme="dark"] .th .ry{transform:rotate(80deg) scale(.3);opacity:0}
+.pw{position:relative}
+.pf{display:flex;align-items:center;gap:8px;padding:5px 16px 5px 5px;border-radius:99px;height:44px}
+.av{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#10b981,#7c3aed);color:#fff;font-weight:600;box-shadow:inset 0 1px 0 rgba(255,255,255,.6)}
+.pm{display:none;position:absolute;right:0;top:calc(100% + 16px);min-width:200px;padding:14px;border-radius:14px;background:var(--bg);border:1px solid var(--ln);box-shadow:0 14px 30px -10px rgba(60,20,140,.45);flex-direction:column;gap:10px;align-items:flex-start}.pm.on{display:flex}
+.lw{position:fixed;top:calc(env(safe-area-inset-top,0px) + 12px);right:12px;z-index:5}
+.br{display:flex;align-items:center;gap:10px;font-weight:600;font-size:19px;line-height:1.2}.br small{display:block;font-weight:400;font-size:12px;color:var(--mu)}
+.gt{display:block;background:linear-gradient(90deg,var(--tg1),var(--tg2));-webkit-background-clip:text;background-clip:text;color:transparent}
+main{max-width:1100px;margin:0 auto;padding:16px}
+h2{margin:4px 0 12px;font-size:21px}h3{margin:0;font-size:17px}h4{margin:12px 0 4px;font-size:14px;color:var(--mu)}
+.card{background:var(--card);border:1px solid var(--ln);border-radius:16px;padding:16px;margin-bottom:14px;-webkit-backdrop-filter:blur(14px) saturate(1.3);backdrop-filter:blur(14px) saturate(1.3);box-shadow:inset 0 1px 0 rgba(255,255,255,.35),0 12px 28px -16px rgba(60,20,140,.35)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:14px}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px 16px}
+.st{margin:0;color:var(--mu);font-size:13px;transition:transform .2s}.st:hover{transform:translateY(-3px)}.st b{display:block;font-size:28px;font-weight:600;background:linear-gradient(135deg,var(--tg1),var(--tg2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hd{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+.ov{overflow-x:auto}table{width:100%;min-width:640px;border-collapse:collapse}th,td{text-align:left;padding:8px;border-bottom:1px solid var(--ln);vertical-align:middle}th{font-size:13px;color:var(--mu);font-weight:500}
+tr.lnk{cursor:pointer}tr.lnk:hover{background:var(--hv)}
+label{display:block;font-size:13px;color:var(--mu);margin:6px 0}
+input,select{font:inherit;width:100%;height:40px;padding:8px 10px;border:1px solid var(--ln);border-radius:10px;background:var(--inp);color:var(--tx);margin-top:3px;accent-color:var(--v)}
+input:focus,select:focus{border-color:var(--e);box-shadow:0 0 0 3px rgba(16,185,129,.25)}
+option{background:var(--bg);color:var(--tx)}
+td input,td select{width:130px;margin:0}td input[type=date]{width:156px}td input[type=number]{width:110px}
+.ck{display:flex;align-items:center;gap:6px;color:var(--tx);font-size:14px;padding:7px 9px;border:1px solid var(--ln);border-radius:10px;margin:0;cursor:pointer;transition:background .2s,border-color .2s}.ck:hover{border-color:var(--e);background:var(--hv)}.ck:has(input:checked){border-color:var(--v);background:var(--hv)}.ck input{width:auto;height:auto;margin:0}.ck small{color:var(--mu);margin-left:auto}
+.lk{background:none;border:0;color:var(--ac);cursor:pointer;font:inherit;padding:6px 0}.lk:hover{text-decoration:underline}.btn+.lk{margin-left:12px}.ts td:nth-child(1),.ts td:nth-child(3){white-space:nowrap}
+.b{display:inline-block;padding:1px 9px;border-radius:99px;font-size:12px;font-weight:600;background:var(--hv);color:var(--mu)}
+.b.ok{background:var(--okb);color:var(--ok)}.b.er{background:var(--erb);color:var(--er)}.b.wa{background:var(--wab);color:var(--wa)}
+.al{padding:9px 12px;border-radius:10px;margin:8px 0}.al.ok{background:var(--okb);color:var(--ok)}.al.er{background:var(--erb);color:var(--er)}.al ul{margin:4px 0 0;padding-left:18px}
+li.ok{color:var(--ok)}li.er{color:var(--er)}ul{padding-left:18px;margin:4px 0}ul.c{list-style:none;padding:0}
+.alg li{margin:5px 0}.mu{color:var(--mu)}.er{color:var(--er)}
+.lg{max-width:380px;margin:12vh auto}
+@media print{.side,.np,.bub,header{display:none!important}.mw{margin:0!important}body{background:#fff!important}.card{background:#fff!important;color:#000!important;box-shadow:none}}
+</style></head><body><div id="app"></div>
+<script>
+const $=s=>document.querySelector(s),E=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const D=n=>{const d=new Date();d.setDate(d.getDate()+n);return d.toISOString().slice(0,10)},T=D(0),dl=e=>Math.round((new Date(e)-new Date(T))/864e5);
+const USERS={admin:['admin123','Admin','Administrator'],xodim:['xodim123','Laboratoriya xodimi','Xodim'],rahbar:['rahbar123','Rahbar','Rahbar']};
+const PT=['Sut mahsuloti','Go‘sht mahsuloti','Non va un mahsulotlari','Meva-sabzavot','O‘simlik moyi','Boshqa'];
+const IND=[
+{id:'prot',n:'Oqsil (xom protein)',c:'Oqsil',u:'%',eq:['kj','bal'],rg:[1,2,3,4,5],cs:['Kjeldahl probirkalari','Filtr qog‘ozi','Distillangan suv'],
+std:[['GOST','GOST 10846-91'],['ISO','ISO 1871:2009'],['Korxona metodi','KM-01 (Kjeldahl)']],
+sp:'Namunani maydalab, 0,5–1,0 g ni analitik tarozida 0,1 mg aniqlikda tortib, Kjeldahl probirkasiga soling.',
+an:'H2SO4 va katalizator bilan 420 °C da hazm qiling, NaOH bilan distillang, ajralgan NH3 ni borat kislotada tutib 0,1 M HCl bilan titrlang.',
+cl:'Oqsil % = (V − V0) × 0,1 × 0,014 × F × 100 / m; F — konversiya koeffitsiyenti (odatda 6,25).'},
+{id:'fat',n:'Yog‘ (umumiy)',c:'Yog‘',u:'%',eq:['sox','bal'],rg:[6],cs:['Ekstraksiya gilzalari','Paxta','Qaynash toshlari'],
+std:[['ISO','ISO 659:2009'],['GOST','GOST 29033-91'],['Korxona metodi','KM-02 (Soxhlet)']],
+sp:'Quritilgan namunadan 3–5 g ni tortib, gilzaga joylang va paxta bilan yoping.',
+an:'Soxhlet apparatida n-geksan bilan 4–6 soat ekstraksiya qiling, erituvchini haydab, qoldiqni quriting va torting.',
+cl:'Yog‘ % = (m1 − m0) × 100 / m; m0 — bo‘sh kolba, m1 — yog‘li kolba massasi.'},
+{id:'ph',n:'pH (kislotalik)',c:'Boshqa',u:'pH',eq:['ph','bal'],rg:[13],cs:['Stakanlar','Distillangan suv'],
+std:[['ISO','ISO 1842:1991'],['GOST','GOST 26188-2016'],['Uskuna ishlab chiqaruvchisi','Mettler Toledo pH-metriya bo‘yicha yo‘riqnoma']],
+sp:'Namunani gomogenlang; quyuq bo‘lsa 1:10 nisbatda distillangan suvda suspenziya tayyorlang.',
+an:'Elektrodni pH 4,01 va 7,00 bufer bilan kalibrlang, namunaga tushirib, barqaror ko‘rsatkichni yozing.',
+cl:'Hisoblash talab qilinmaydi: 3 ta parallel o‘lchash o‘rtachasi olinadi.'},
+{id:'vitc',n:'Vitamin C (askorbin kislota)',c:'Vitamin',u:'mg/100 g',eq:['hplc','cen','bal'],rg:[7,8,9],cs:['HPLC vialalari','0,45 µm shprits-filtr','C18 kolonka'],
+std:[['GOST','GOST 24556-89'],['Uskuna ishlab chiqaruvchisi','Agilent HPLC-UV metodi (245 nm)'],['Korxona metodi','KM-03 (HPLC)']],
+sp:'Namunani 3% metafosfat kislota bilan gomogenlab, 10 000 g da 10 daqiqa sentrifugalang va supernatantni filtrlang.',
+an:'C18 kolonkada, 245 nm da izokratik elyuirlab, kalibrovka grafigi bo‘yicha konsentratsiyani toping.',
+cl:'C (mg/100 g) = c × V × 100 / (m × 1000); c — mkg/ml, V — ml, m — g.'},
+{id:'fe',n:'Temir (Fe)',c:'Mineral',u:'mg/kg',eq:['uv','cen','bal'],rg:[10,11,12],cs:['O‘lchov kolbalari','Kyuvetalar','Pipetka uchliklari'],
+std:[['Milliy standart','O‘zDSt (raqamini Admin kiritadi)'],['Korxona metodi','KM-05 (o-fenantrolin)']],
+sp:'Namunani minerallashtirib, eritmani hajmga keltiring va sentrifugalab tiniqlang.',
+an:'Gidroksilamin va o-fenantrolin qo‘shib rang hosil qiling, 510 nm da optik zichlikni o‘lchang.',
+cl:'Fe (mg/kg) = c × V / m; c — mg/L, V — L, m — kg.'},
+{id:'fame',n:'Yog‘ kislotalari tarkibi',c:'Yog‘',u:'% (ulush)',eq:['gc','bal'],rg:[14,6],cs:['GC vialalari','Shpritslar','Kapillyar kolonka'],
+std:[['ISO','ISO 12966-4:2015 (GC-FID)'],['ISO','ISO 12966-2:2017'],['GOST','GOST 31665-2012']],
+sp:'Yog‘ni ajratib, BF3-metanol bilan metillab, n-geksan bilan ekstraksiya qiling.',
+an:'Eritmani GC-FID ga kiriting, haroratni dasturlab ajrating, cho‘qqilarni standart aralashma bilan solishtiring.',
+cl:'Kislota ulushi % = Ai × 100 / ΣA (maydonni normallashtirish).'},
+{id:'ftir',n:'Yog‘ sifati (FTIR, ATR)',c:'Yog‘',u:'%',eq:['ftir'],rg:[15],cs:['ATR kristalini tozalash salfetkasi'],
+std:[['Uskuna ishlab chiqaruvchisi','PerkinElmer Spectrum Two ATR metodi'],['Korxona metodi','KM-06 (FTIR)']],
+sp:'Yog‘ namunasini 40 °C da eritib, gomogenlang.',
+an:'ATR kristalini izopropanol bilan tozalab, fonni yozing; namunani joylab 4000–650 sm⁻¹ oralig‘ida 16 marta skanerlang.',
+cl:'Cho‘qqi balandligi/maydoni kalibrovka modeli bo‘yicha % ga o‘tkaziladi.'},
+{id:'nam',n:'Namlik',c:'Boshqa',u:'%',eq:['ov','bal'],rg:[],cs:['Byukslar','Eksikator'],std:[['ISO','ISO 712:2009'],['GOST','GOST 13586.5-2015'],['Korxona metodi','KM-04']],
+sp:'Namunani maydalab, 3–5 g ni oldindan quritilgan byuksda 0,1 mg aniqlikda torting.',an:'Quritish shkafida standartda ko‘rsatilgan haroratda doimiy massagacha quriting, eksikatorda sovutib torting.',cl:'Namlik % = (m1 − m2) × 100 / (m1 − m0); m0 — byuks, m1 — quritishdan oldin, m2 — keyin.'},
+{id:'kul',n:'Kul (mineral moddalar)',c:'Mineral',u:'%',eq:['mf','bal'],rg:[],cs:['Chinni tigellar','Eksikator','Qisqich'],std:[['ISO','ISO 2171'],['Korxona metodi','KM-07 (kuydirish)']],
+sp:'Tigelni kuydirib torting; 2–3 g namunani tigelga solib, qorayguncha oldindan kuydiring.',an:'Muffel pechda 550 °C da kulrang-oq kul hosil bo‘lguncha kuydiring, eksikatorda sovutib torting.',cl:'Kul % = (m2 − m0) × 100 / (m1 − m0).'},
+{id:'brix',n:'Eruvchan quruq modda (Brix)',c:'Boshqa',u:'°Brix',eq:['rf'],rg:[],cs:['Pipetka','Yumshoq salfetka','Distillangan suv'],std:[['ISO','ISO 2173:2003'],['GOST','GOST 28562-90'],['Uskuna ishlab chiqaruvchisi','HANNA HI98800 yo‘riqnomasi']],
+sp:'Namunani gomogenlang, kerak bo‘lsa filtrlang va 20 °C ga keltiring.',an:'Refraktometrni distillangan suv bilan nolga keltiring, prizmaga 2–3 tomchi namuna tomizib, ko‘rsatkichni yozing.',cl:'Hisoblash talab qilinmaydi: 3 ta parallel o‘lchash o‘rtachasi olinadi.'},
+{id:'acid',n:'Titrlanuvchi kislotalik',c:'Boshqa',u:'g/100 g',eq:['tit','ph','bal'],rg:[16],cs:['Stakanlar','Distillangan suv'],std:[['ISO','ISO 750:1998'],['GOST','GOST ISO 750-2013'],['Uskuna ishlab chiqaruvchisi','Hanna HI901 titrator yo‘riqnomasi']],
+sp:'10–25 g namunani tortib, suv bilan hajmga keltiring va filtrlang.',an:'Alikvotni avtomatik titratorda 0,1 M NaOH bilan pH 8,1 gacha titrlang.',cl:'Kislotalik = V × c × K × 100 × (Vk / Va) / m; K — kislota mmol massasi (g/mmol), Vk/Va — suyultirish.'},
+{id:'aroma',n:'Aroma (uchuvchan birikmalar)',c:'Boshqa',u:'mkg/kg',eq:['gcms'],rg:[],cs:['SPME tola','GC vialalari'],std:[['Uskuna ishlab chiqaruvchisi','GC/MS (HS-SPME) yo‘riqnomasi'],['Korxona metodi','KM-08']],
+sp:'Namunani vialaga solib, ichki standart qo‘shing va muhrlang.',an:'HS-SPME bilan uchuvchan birikmalarni ajratib, GC/MS da tahlil qiling, spektrlarni kutubxona bilan solishtiring.',cl:'C = Ai × Cis / (Ais × RF); Cis — ichki standart, RF — javob koeffitsiyenti.'}];
+const seed=()=>({
+eq:[['hplc','HPLC (suyuqlik xromatografi)','Agilent 1260 Infinity II LC','1.01',1,'Ishlaydi'],['gc','Gaz xromatografi (GC-FID)','Kristall 9000 (ECD detektorsiz)','1.01',1,'Ishlaydi'],['gcms','GC/MS','—','—',0,'Yo‘q'],['uv','UV-Vis spektrofotometr','V-5000','1.01; 1.03–1.05',2,'Ishlaydi'],['ftir','IR/FTIR spektrofotometr','IRSpirit','1.01',1,'Ishlaydi'],['kj','Kjeldahl qurilmasi','—','—',0,'Yo‘q'],['sox','Soxhlet ekstraktori','—','—',0,'Yo‘q'],['ph','pH-metr / ion-metr','PXSJ-216F; PHscan30S-E; BANTE210','1.01; 1.03–1.05',4,'Ishlaydi'],['bal','Analitik tarozi','ZEC 21; PX224 (0,1 mg)','1.01; 1.03–1.05; 3.16',3,'Ishlaydi'],['cen','Sentrifuga','L-450; DM0412; DM0424','1.03–1.05; 3.16',3,'Ishlaydi'],['tit','Avtomatik titrator','HI901C1-02','1.01',1,'Ishlaydi'],['ov','Quritish shkafi','MST-55; BINDER','1.03–1.05; 3.16',2,'Ishlaydi'],['mf','Muffel pech','NEVO QTZ110/7','1.03–1.05',1,'Ishlaydi'],['rf','Raqamli refraktometr','HANNA HI98800','3.16',1,'Ishlaydi'],['rv','Rotor bug‘latgich','BIOBASE RE100-Pro','1.03–1.05',2,'Ishlaydi'],['vis','Rotatsion viskozimetr','BDV-8S','1.01; 1.03–1.05',2,'Ishlaydi'],['mant','Kolba isitgich (mantiya)','ET.WHM12012','1.01; 1.03–1.05',2,'Ishlaydi'],['hp','Isitish plitasi','HP380-PRO; MS7H-550-PRO','1.01; 1.03–1.05',3,'Ishlaydi'],['stir','Magnit aralashtirgich','1DM0412-1','1.03–1.05; 3.16',4,'Ishlaydi'],['dist','Distillyator','BE-4; AE-4','1.01; 1.03–1.05',2,'Ishlaydi'],['cond','Konduktometr','HI5321-02','1.03–1.05',1,'Ishlaydi'],['dens','Densitometr (areometr)','—','1.03–1.05',1,'Ishlaydi'],['auto','Avtoklav','LS-75HD','1.03–1.05',1,'Ishlaydi'],['reac','Yuqori bosimli reaktor','CJF-2','1.03–1.05',1,'Ishlaydi'],['bath','Suv hammomi','DK-98IIA','1.03–1.05',1,'Ishlaydi'],['th','Elektron termometr','YET-610L','1.03–1.05',1,'Ishlaydi'],['mill','Laboratoriya tegirmoni','DG-65','3.16',1,'Ishlaydi'],['us','Ultratovush vannasi','GT SONIC-D5','3.16',1,'Ishlaydi'],['inc','Inkubator va quruq termostat','SPX-70; Dry block','3.16',2,'Ishlaydi'],['mic','Mikroskoplar','BioBlue BB.4260, BB.4253; DN-300M','1.01; 1.03–1.05; 3.16',4,'Ishlaydi'],['hood','Tortma shkaf','MCO-150','1.03–1.05',1,'Ishlaydi'],['bur','Laboratoriya byuretkasi','TRITE','1.01',1,'Ishlaydi'],['nb','Noutbuk (laboratoriya uchun)','L156','1.01',1,'Ishlaydi'],['fuse','Saqlagichlar (Fuse), mikroskop uchun','Fuse','1.01',2,'Ishlaydi'],['oil','Immersion moy, 100 ml','—','1.01',2,'Ishlaydi'],['opt','Optik tozalash aralashmasi (izopropil spirt 99%), 100 ml','—','1.01',2,'Ishlaydi'],['lc','Laboratoriya kompleksi','—','1.03–1.05',1,'Ishlaydi'],['pip','Pipet-dozatorlar','Mikro Pette Plus (mobil to‘plam tarkibida)','3.16',8,'Ishlaydi'],['ind','Bug‘li sterilizatsiya indikatori (ko‘p rejimli)','—','3.16',1,'Ishlaydi'],['tp','Texnik parametrlar (komplekt)','—','3.16',1,'Ishlaydi'],['cab','Reagent saqlash shkafi','—','1.03–1.05; 3.16',6,'Ishlaydi']].map(a=>({id:a[0],n:a[1],m:a[2],x:a[3],k:a[4],st:a[5]})),
+rg:[[1,'Sulfat kislota (konts.)',2.5,'L',400,1],[2,'Katalizator (K2SO4 + CuSO4)',500,'g',500,100],[3,'NaOH 40% eritma',3,'L',200,1],[4,'Borat kislota 4%',0.8,'L',40,1],[5,'HCl 0,1 M',1.5,'L',300,0.5],[6,'n-Geksan',1.2,'L',150,2],[7,'Atsetonitril (HPLC)',2,'L',25,1],[8,'Metafosfat kislota',100,'g',180,20],[9,'Askorbin kislota standarti',5,'g',220,1],[10,'o-Fenantrolin',25,'g',55,5],[11,'Gidroksilamin gidroxlorid',100,'g',-5,20],[12,'Fe standart eritma (1000 mg/L)',250,'ml',300,50],[13,'Bufer eritmalar (pH 4,01 / 7,00)',500,'ml',90,100],[14,'BF3-metanol 14%',0,'ml',120,50],[15,'Izopropanol',1,'L',250,0.3],[16,'NaOH 0,1 M (titrlash uchun)',1,'L',200,0.3]].map(a=>({id:a[0],n:a[1],q:a[2],u:a[3],e:D(a[4]),m:a[5]})),
+sm:[{id:'NM-2026-001',n:'Qatiq (2,5% yog‘li)',d:D(-3),p:'Sut mahsuloti',t:[{i:'prot',s:0,r:'3,1',nr:'≥ 2,8',z:'Me’yorda'},{i:'fat',s:0,r:'',nr:'',z:''},{i:'ph',s:0,r:'',nr:'',z:''},{i:'fame',s:0,r:'',nr:'',z:''}]},
+{id:'NM-2026-002',n:'Olma sharbati',d:D(-1),p:'Meva-sabzavot',t:[{i:'ph',s:0,r:'3,4',nr:'3,0–4,0',z:''},{i:'vitc',s:1,r:'',nr:'',z:''},{i:'fe',s:1,r:'',nr:'',z:''},{i:'brix',s:0,r:'',nr:'',z:''},{i:'acid',s:0,r:'',nr:'',z:''}]}]});
+let S,U=null,view='dash',cur=0;
+try{S=JSON.parse(localStorage.getItem('univerlab2'))}catch(e){}
+S=S||seed();
+const save=()=>{try{localStorage.setItem('univerlab2',JSON.stringify(S))}catch(e){}};
+const canW=()=>U.role!='Rahbar',isA=()=>U.role=='Admin',rok=r=>r.q>0&&r.e>=T,eok=e=>e.st=='Ishlaydi';
+const I_=id=>IND.find(x=>x.id==id),eqs=I=>[...I.eq.map(id=>S.eq.find(x=>x.id==id)),...S.eq.filter(e=>(e.ind||[]).includes(I.id))],rgs=I=>[...I.rg.map(id=>S.rg.find(x=>x.id==id)),...S.rg.filter(g=>(g.ind||[]).includes(I.id))];
+function chk(I){const r=[];eqs(I).forEach(e=>{if(!eok(e))r.push(`Uskuna «${e.n}» mavjud emas — ${e.st=='Yo‘q'?'laboratoriya ro‘yxatida yo‘q':'holati: '+e.st}.`)});
+rgs(I).forEach(g=>{if(g.q<=0)r.push(`Reagent «${g.n}» mavjud emas — qoldiq 0 ${g.u}.`);else if(g.e<T)r.push(`Reagent «${g.n}» yaroqsiz — muddati ${g.e} da tugagan.`)});return r}
+const ss=s=>{const n=s.t.filter(x=>x.r!=='').length;return n==s.t.length?['Bajarildi','ok']:n?['Jarayonda','wa']:['Qabul qilindi','']};
+const nav=v=>{view=v;render()},op=k=>{cur=k;view='det';render()};
+function upd(k,id,f,v){if(v==='')return;S[k].find(x=>x.id==id)[f]=v;save();render()}
+function login(){const u=$('#lg').value.trim().toLowerCase(),x=USERS[u];if(x&&x[0]===$('#pw').value){U={name:x[2],role:x[1]};view='dash';render()}else $('#er').textContent='Login yoki parol noto‘g‘ri.'}
+function addSm(){const n=$('#fn').value.trim(),i=$('#fi').value.trim(),t=[...document.querySelectorAll('.ck input:checked')].map(x=>({i:x.value,s:0,r:'',nr:'',z:''}));
+const m=!n||!i?'Namuna nomi va ID ni kiriting.':S.sm.some(s=>s.id==i)?'Bu ID allaqachon mavjud.':!t.length?'Kamida bitta ko‘rsatkich tanlang.':'';
+if(m)return $('#er').textContent=m;S.sm.push({id:i,n,d:$('#fd').value||T,p:$('#fp').value,t});save();op(S.sm.length-1)}
+function setS(a,k,v){S.sm[a].t[k].s=+v;save();render()}
+function saveR(a,k){const t=S.sm[a].t[k],v=$(`#r${a}_${k}`).value.trim();if(!v)return $(`#m${a}_${k}`).textContent='Natijani kiriting.';
+t.r=v;t.nr=$(`#n${a}_${k}`).value.trim();t.z=$(`#z${a}_${k}`).value.trim();save();render()}
+const V={};
+V.dash=()=>{const tt=S.sm.flatMap(s=>s.t),dn=tt.filter(x=>x.r!=='').length,ok=S.eq.filter(eok).length,lo=S.rg.filter(r=>r.q<=r.m),ex=S.rg.filter(r=>dl(r.e)<=60);
+const c=(a,b)=>`<div class="card st"><b>${b}</b>${a}</div>`,l=(a,f)=>a.length?`<ul>${a.map(f).join('')}</ul>`:'<p class=mu>Hozircha yo‘q.</p>';
+return `<h2>Boshqaruv paneli</h2><div class=grid>${c('Kelgan namunalar',S.sm.length)}${c('Rejalashtirilgan tahlillar',tt.length-dn)}${c('Bajarilgan tahlillar',dn)}${c('Mavjud uskunalar',ok+' / '+S.eq.length)}${c('Kamayib borayotgan reagentlar',lo.length)}${c('Muddati tugayotgan reagentlar',ex.length)}</div>
+<div class=g2><div class=card><h3>Kamayib borayotgan reagentlar</h3>${l(lo,r=>`<li>${r.n}: <b>${r.q} ${r.u}</b> (minimum ${r.m} ${r.u})</li>`)}</div>
+<div class=card><h3>Muddati tugayotgan reagentlar</h3>${l(ex,r=>`<li>${r.n}: ${r.e} — ${dl(r.e)<0?'<b class=er>muddati o‘tgan</b>':dl(r.e)+' kun qoldi'}</li>`)}</div></div>`};
+V.sm=()=>`<div class=hd><h2>Namunalar</h2>${canW()?'<button class="gl btn" onclick="nav(\'new\')">+ Yangi namuna</button>':''}</div><div class="card ov"><table class=ts><tr><th>ID<th>Namuna nomi<th>Kelgan sana<th>Mahsulot turi<th>Ko‘rsatkichlar<th>Holat</tr>${S.sm.map((s,k)=>{const z=ss(s);return `<tr class=lnk onclick="op(${k})"><td>${E(s.id)}<td><b>${E(s.n)}</b><td>${s.d}<td>${s.p}<td>${s.t.map(t=>I_(t.i).n).join(', ')}<td><span class="b ${z[1]}">${z[0]}</span>`}).join('')}</table></div>`;
+V.new=()=>`<h2>Yangi namuna</h2><div class=card><div class=g2><label>Namuna nomi<input id=fn></label><label>Namuna ID<input id=fi value="NM-${T.slice(0,4)}-${String(S.sm.length+1).padStart(3,'0')}"></label><label>Kelgan sana<input id=fd type=date value=${T}></label><label>Mahsulot turi<select id=fp>${PT.map(p=>`<option>${p}</option>`).join('')}</select></label></div>
+<h4>Aniqlanishi kerak bo‘lgan ko‘rsatkichlar</h4><div class=g2>${IND.map(i=>`<label class=ck><input type=checkbox value=${i.id}>${i.n}<small>${i.c}</small></label>`).join('')}</div><p id=er class=er></p><button class="gl btn" onclick=addSm()>Namunani saqlash</button> <button class=lk onclick="nav('sm')">Bekor qilish</button></div>`;
+function tst(t,k){const I=I_(t.i),dn=t.r!=='',bd=dn?[]:chk(I),sd=I.std[t.s],w=canW()&&!bd.length,eq=eqs(I),rg=rgs(I),a=cur,m=(o,x)=>`<li class="${o?'ok':'er'}">${o?'✓':'✗'} ${x}</li>`;
+return `<section class=card><div class=hd><h3>${I.n}</h3><span class="b ${dn?'ok':bd.length?'er':'wa'}">${dn?'Bajarildi':bd.length?'Bajarib bo‘lmaydi':'Rejalashtirilgan'}</span></div>
+${bd.length?`<div class="al er"><b>Tahlilni boshlab bo‘lmaydi. Sabab:</b><ul>${bd.map(x=>`<li>${x}</li>`).join('')}</ul></div>`:dn?'':'<div class="al ok">Tahlil imkoniyati bor: uskuna va reagentlar tayyor.</div>'}
+<div class=g2><div><h4>Kerakli uskunalar</h4><ul class=c>${eq.map(e=>m(eok(e),`${e.n} (${e.m}) — ${eok(e)?'mavjud':e.st}`)).join('')}</ul><h4>Sarflanadigan materiallar</h4><ul>${I.cs.map(x=>`<li>${x}</li>`).join('')}</ul></div>
+<div><h4>Kerakli reagentlar</h4><ul class=c>${rg.map(g=>m(rok(g),`${g.n} — ${g.q} ${g.u}, muddati ${g.e}`)).join('')||'<li class=mu>Talab qilinmaydi</li>'}</ul></div></div>
+<label>Standart va metod<select onchange="setS(${a},${k},this.value)" ${canW()?'':'disabled'}>${I.std.map((x,j)=>`<option value=${j} ${j==t.s?'selected':''}>${x[0]}: ${x[1]}</option>`).join('')}</select></label>
+<h4>Ish algoritmi — ${sd[1]}</h4><ol class=alg><li><b>Namuna tayyorlash.</b> ${I.sp}<li><b>Reagent tayyorlash.</b> ${rg.length?rg.map(g=>g.n).join('; ')+' — muddatini tekshirib, ishchi eritmalarni tayyorlang.':'Reagent talab qilinmaydi.'}<li><b>Uskuna tayyorlash.</b> ${eq.map(e=>e.n).join('; ')} — holati va kalibrovkasini tekshiring.<li><b>Tahlil.</b> ${I.an}<li><b>Hisoblash.</b> ${I.cl}<li><b>Natija.</b> Quyidagi maydonlarga kiriting.</ol>
+<div class=g2><label>Natija (${I.u})<input id=r${a}_${k} value="${E(t.r)}" ${w?'':'disabled'}></label><label>Me’yor<input id=n${a}_${k} value="${E(t.nr)}" ${w?'':'disabled'}></label><label>Izoh<input id=z${a}_${k} value="${E(t.z)}" ${w?'':'disabled'}></label></div>
+${w?`<button class="gl btn" onclick="saveR(${a},${k})">Natijani saqlash</button> <span id=m${a}_${k} class=er></span>`:`<p class=mu>${bd.length?'Sabablar bartaraf etilmaguncha natija kiritib bo‘lmaydi.':'Sizda faqat ko‘rish huquqi bor.'}</p>`}</section>`}
+V.det=()=>{const s=S.sm[cur],z=ss(s);return `<div class="hd np"><button class=lk onclick="nav('sm')">← Namunalar</button><button class="gl btn" onclick="nav('rep')">Hisobot</button></div><div class=card><h2>${E(s.n)} <span class="b ${z[1]}">${z[0]}</span></h2><p class=mu>ID: <b>${E(s.id)}</b> · Kelgan sana: ${s.d} · Mahsulot turi: ${s.p}</p><p class=mu>Ish tartibi: ko‘rsatkich → metod → uskuna → reagent → standart → algoritm → natija → hisobot</p></div>${s.t.map(tst).join('')}`};
+V.rep=()=>{const s=S.sm[cur];return `<div class="hd np"><button class=lk onclick="nav('det')">← Namunaga qaytish</button><button class="gl btn" onclick="print()">Chop etish</button></div><div class=card><h2>Tahlil hisoboti</h2><p>Namuna: <b>${E(s.n)}</b> (ID: ${E(s.id)})<br>Mahsulot turi: ${s.p} · Kelgan sana: ${s.d}<br>Hisobot sanasi: ${T} · Tayyorladi: ${U.name} (${U.role})</p><div class=ov><table><tr><th>Tahlil nomi<th>Natija<th>Birlik<th>Me’yor<th>Metod<th>Izoh</tr>${s.t.map(t=>{const I=I_(t.i);return `<tr><td>${I.n}<td>${t.r!==''?`<b>${E(t.r)}</b>`:'<span class=mu>kiritilmagan</span>'}<td>${I.u}<td>${E(t.nr)||'—'}<td>${I.std[t.s][1]}<td>${E(t.z)||'—'}`}).join('')}</table></div></div>`};
+V.eq=()=>`<div class=hd><h2>Uskunalar bazasi</h2>${isA()?'<button class="gl btn" onclick=gE()>+ Yangi uskuna</button>':''}</div><div class="card ov"><table><tr><th>Nomi<th>Modeli<th>Xona<th>Soni<th>Holati<th>Mavjudligi<th>Qaysi tahlillarda ishlatiladi</tr>${S.eq.map(e=>`<tr><td><b>${e.n}</b><td>${e.m}<td>${e.x}<td>${e.k}<td>${isA()?`<select onchange="upd('eq','${e.id}','st',this.value)">${['Ishlaydi','Kalibrovkada','Ta’mirda','Yo‘q'].map(x=>`<option ${x==e.st?'selected':''}>${x}</option>`).join('')}</select>`:e.st}<td><span class="b ${eok(e)?'ok':'er'}">${eok(e)?'Mavjud':'Mavjud emas'}</span><td>${IND.filter(i=>(i.eq.includes(e.id)||(e.ind||[]).includes(i.id))).map(i=>i.n).join(', ')||'—'}${dlb('eq',e.id,e.c)}`).join('')}</table></div>`;
+V.rg=()=>`<div class=hd><h2>Reagentlar</h2>${isA()?'<button class="gl btn" onclick=gR()>+ Yangi reagent</button>':''}</div><div class="card ov"><table><tr><th>Nomi<th>Miqdori<th>Birlik<th>Yaroqlilik muddati<th>Qaysi tahlilda<th>Holat</tr>${S.rg.map(r=>{const d=dl(r.e),h=r.q<=0?['Mavjud emas (tugagan)','er']:d<0?['Mavjud emas (muddati o‘tgan)','er']:r.q<=r.m?['Kam qoldi','wa']:d<=60?['Muddati yaqin','wa']:['Mavjud','ok'];
+return `<tr><td>${r.n}<td>${isA()?`<input type=number step=any min=0 value=${r.q} onchange="upd('rg',${r.id},'q',+this.value)">`:r.q}<td>${r.u}<td>${isA()?`<input type=date value=${r.e} onchange="upd('rg',${r.id},'e',this.value)">`:r.e}<td>${IND.filter(i=>(i.rg.includes(r.id)||(r.ind||[]).includes(i.id))).map(i=>i.n).join(', ')}${dlb('rg',r.id,r.c)}<td><span class="b ${h[1]}">${h[0]}</span>`}).join('')}</table></div>${isA()?'<p class=mu>Admin miqdor va yaroqlilik muddatini bevosita jadvalda o‘zgartirishi mumkin.</p>':''}`;
+let sb=innerWidth>800;
+try{const t=localStorage.getItem('uvl-th');document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light')}catch(e){document.documentElement.dataset.theme='light'}
+document.body.insertAdjacentHTML('afterbegin','<div class=bub>'+Array.from({length:10},(_,k)=>`<i style="left:${6+k*9.5}%;--s:${14+(k*7)%30}px;animation-duration:${16+(k*5)%14}s;animation-delay:-${k*3.1}s"></i>`).join('')+'</div>');
+const IC={dash:'📊',sm:'🧪',eq:'🔬',rg:'⚗️'},
+FL='<svg width="36" height="36" viewBox="0 0 32 32" fill="none" stroke-linecap="round" stroke-linejoin="round"><defs><linearGradient id="gg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#10b981"/><stop offset="1" stop-color="#7c3aed"/></linearGradient></defs><path d="M12 3h8M13 3v9L5.5 25.5A3 3 0 0 0 8 30h16a3 3 0 0 0 2.5-4.5L19 12V3" stroke="url(#gg)" stroke-width="2.4"/><path d="M8 21h16l2.5 4.5A3 3 0 0 1 24 30H8a3 3 0 0 1-2.5-4.5z" fill="url(#gg)" opacity=".75"/></svg>',
+thb=()=>'<button class="gl ic th" onclick="tgl()" aria-label="Kun / tun rejimi" title="Kun / tun rejimi"><svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><mask id="mk"><rect width="24" height="24" fill="#fff"/><circle class="cut" cx="24" cy="2" r="6.5" fill="#000"/></mask><circle class="sn" cx="12" cy="12" r="6" mask="url(#mk)"/><path class="ry" d="M12 1.5v2.5M12 20v2.5M1.5 12H4M20 12h2.5M4.6 4.6l1.8 1.8M17.6 17.6l1.8 1.8M4.6 19.4l1.8-1.8M17.6 6.4l1.8-1.8" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg></button>',
+pf=()=>`<div class=pw><button class="gl pf" onclick="event.stopPropagation();$('.pm').classList.toggle('on')" aria-label="Profil"><span class=av>${E(U.name[0])}</span><span class=pn>${E(U.name)}</span></button><div class=pm onclick="event.stopPropagation()"><b>${E(U.name)}</b><span class="b wa">${U.role}</span><button class=gl onclick="U=null;render()">Chiqish</button></div></div>`;
+function tgl(){const t=document.documentElement.dataset.theme=='dark'?'light':'dark';document.documentElement.dataset.theme=t;try{localStorage.setItem('uvl-th',t)}catch(e){}}
+function sbt(){sb=!sb;$('#sh').classList.toggle('o',sb)}
+function go(v){if(innerWidth<=800)sb=false;nav(v)}
+document.addEventListener('click',()=>{const m=$('.pm');if(m)m.classList.remove('on')});
+const IL=()=>IND.map(i=>`<label class=ck><input type=checkbox value=${i.id}>${i.n}<small>${i.c}</small></label>`).join(''),
+sel=()=>[...document.querySelectorAll('.ck input:checked')].map(x=>x.value),
+dlb=(k,id,c)=>c&&isA()?`<br><button class=lk onclick="del(this,'${k}','${id}')">O‘chirish</button>`:'',
+gE=()=>nav('neweq'),gR=()=>nav('newrg'),
+NA='<p class=er>Bu bo‘limga faqat Admin kira oladi.</p>';
+V.neweq=()=>isA()?`<h2>Yangi uskuna qo‘shish</h2><div class=card><div class=g2><label>Uskuna nomi<input id=xn></label><label>Modeli<input id=xm></label><label>Xona<input id=xr placeholder="masalan, 1.01"></label><label>Soni<input id=xk type=number min=1 value=1></label><label>Holati<select id=xs>${['Ishlaydi','Kalibrovkada','Ta’mirda','Yo‘q'].map(x=>`<option>${x}</option>`).join('')}</select></label></div><h4>Qaysi tahlillar uchun shart (ixtiyoriy)</h4><p class=mu style="margin:0 0 8px;font-size:13px">Tanlangan tahlillar bu uskuna «Ishlaydi» holatida bo‘lmaguncha boshlanmaydi. Ro‘yxatdagi «Yo‘q» uskunalar (Kjeldahl, Soxhlet, GC/MS) uchun yangisini qo‘shmang — Uskunalar jadvalida holatini «Ishlaydi» ga o‘zgartiring.</p><div class=g2>${IL()}</div><p id=er class=er></p><button class="gl btn" onclick=addEq()>Uskunani saqlash</button> <button class=lk onclick="nav('eq')">Bekor qilish</button></div>`:NA;
+V.newrg=()=>isA()?`<h2>Yangi reagent qo‘shish</h2><div class=card><div class=g2><label>Reagent nomi<input id=gn></label><label>Miqdori<input id=gq type=number step=any min=0></label><label>Birlik<select id=gu>${['L','ml','kg','g','mg'].map(x=>`<option>${x}</option>`).join('')}</select></label><label>Yaroqlilik muddati<input id=ge type=date value=${D(365)}></label><label>Minimal qoldiq (ogohlantirish chegarasi)<input id=gm type=number step=any min=0 value=0></label></div><h4>Qaysi tahlillarda ishlatiladi (ixtiyoriy)</h4><div class=g2>${IL()}</div><p id=er class=er></p><button class="gl btn" onclick=addRg()>Reagentni saqlash</button> <button class=lk onclick="nav('rg')">Bekor qilish</button></div>`:NA;
+function addEq(){if(!isA())return;const n=$('#xn').value.trim(),k=+$('#xk').value,er=!n?'Uskuna nomini kiriting.':!(k>=1)?'Sonini kiriting (kamida 1).':'';
+if(er)return $('#er').textContent=er;
+S.eq.push({id:'x'+Date.now(),n,m:$('#xm').value.trim()||'—',x:$('#xr').value.trim()||'—',k,st:$('#xs').value,ind:sel(),c:1});save();nav('eq')}
+function addRg(){if(!isA())return;const n=$('#gn').value.trim(),qv=$('#gq').value,e=$('#ge').value,er=!n?'Reagent nomini kiriting.':qv===''||+qv<0?'Miqdorni kiriting (0 yoki undan katta).':!e?'Yaroqlilik muddatini tanlang.':'';
+if(er)return $('#er').textContent=er;
+S.rg.push({id:Math.max(0,...S.rg.map(r=>r.id))+1,n,q:+qv,u:$('#gu').value,e,m:+$('#gm').value||0,ind:sel(),c:1});save();nav('rg')}
+function del(b,k,id){if(!isA())return;if(!b.dataset.s){b.dataset.s=1;b.textContent='Aniq o‘chirilsinmi?';setTimeout(()=>{b.textContent='O‘chirish';delete b.dataset.s},3000);return}S[k]=S[k].filter(x=>x.id!=id);save();render()}
+function render(){const A=$('#app');
+if(!U){A.innerHTML=`<div class=lw>${thb()}</div><div class="card lg"><div class=br style="font-size:24px">${FL}<span><b class=gt>UniLab</b><small>Universitet oziq-ovqat laboratoriyasi — yopiq tizim</small></span></div><label>Login<input id=lg autocomplete=username></label><label>Parol<input id=pw type=password onkeydown="if(event.key=='Enter')login()"></label><p id=er class=er></p><button class="gl btn" onclick=login()>Kirish</button><p class=mu style="font-size:12px">Demo: admin / admin123 · xodim / xodim123 · rahbar / rahbar123</p></div>`;return}
+const tb=[['dash','Boshqaruv paneli'],['sm','Namunalar'],['eq','Uskunalar'],['rg','Reagentlar']],ac=['det','new','rep'].includes(view)?'sm':view=='neweq'?'eq':view=='newrg'?'rg':view;
+A.innerHTML=`<div class="shell${sb?' o':''}" id=sh><aside class="side np"><div class=br><button class="gl ic fb" onclick="sbt()" title="Yon panelni ochish / yopish" aria-label="Yon panelni ochish / yopish">${FL}</button><span class=t><b class=gt>UniLab</b><small>Oziq-ovqat laboratoriyasi</small></span></div><nav>${tb.map(t=>`<button class="gl nv${t[0]==ac?' on':''}" onclick="go('${t[0]}')" title="${t[1]}"><i>${IC[t[0]]}</i><span class=t>${t[1]}</span></button>`).join('')}</nav></aside><div class="scrim np" onclick="sbt()"></div><div class=mw><header class=np><button class="gl ic mf" onclick="sbt()" aria-label="Yon panelni ochish / yopish">${FL.replace(/gg/g,'gm')}</button><span class=sp></span>${thb()}${pf()}</header><main>${V[view]()}</main></div></div>`}
+render();
+</script></body></html>
